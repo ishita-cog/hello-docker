@@ -1,0 +1,49 @@
+# -------------------------------------------------------------------
+# CI Pipeline (Minimal / Dummy Version)
+#
+# This is a simplified CI pipeline created for the AAE ramp exercise.
+# A real production pipeline would also run tests, lint code, and scan
+# for security vulnerabilities. We will add those in Week 2.
+#
+# What this pipeline does right now:
+#   1. Every time someone pushes code or opens a pull request, GitHub
+#      automatically spins up a fresh Linux machine in the cloud.
+#   2. It downloads your code onto that machine.
+#   3. It runs "npm install" in both the api/ and web/ folders to make
+#      sure all dependencies install without errors.
+#
+# Why this matters:
+#   If someone commits a broken package.json (e.g. a typo in a package
+#   name, or a version that doesn't exist), this pipeline will catch it
+#   and turn red before the code can merge into main.
+#
+# How to read the status:
+#   Green checkmark = everything installed fine, safe to merge
+#   Red X           = something broke, do not merge until fixed
+# -------------------------------------------------------------------
+
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download the code from GitHub onto the Linux machine
+      - uses: actions/checkout@v3
+
+      # Step 2: Install the API's Node.js dependencies
+      # This will fail if any package in api/package.json is broken
+      - name: Install API dependencies
+        working-directory: api
+        run: npm install
+
+      # Step 3: Install the web app's Node.js dependencies
+      # This will fail if any package in web/package.json is broken
+      - name: Install Web dependencies
+        working-directory: web
+        run: npm install
