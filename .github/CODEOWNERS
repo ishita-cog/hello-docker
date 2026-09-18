@@ -1,0 +1,23 @@
+# -------------------------------------------------------------------
+# CODEOWNERS
+#
+# This file tells GitHub who must review and approve a pull request
+# before it can be merged into main.
+#
+# How it works:
+#   When someone opens a PR that touches any file in this repo,
+#   GitHub automatically adds the listed owner(s) as required reviewers.
+#   The PR cannot merge until they approve it.
+#
+# In a real enterprise, different teams own different parts of the code.
+# For example:
+#   /api/        @backend-team
+#   /web/        @frontend-team
+#   /db/         @database-team
+#   /security/   @security-team
+#
+# For this ramp exercise, one person owns everything.
+# -------------------------------------------------------------------
+
+# * means "every file in the repo"
+* @ishita-cog
